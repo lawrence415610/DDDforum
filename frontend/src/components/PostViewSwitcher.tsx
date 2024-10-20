@@ -1,3 +1,3 @@
 export const PostsViewSwitcher = () => {
-  return <div>Popular | New</div>;
+  return <h2>Popular | New</h2>;
 };

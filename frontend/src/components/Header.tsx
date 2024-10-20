@@ -26,7 +26,9 @@ const HeaderActionButton = ({ user }: { user?: User }) => (
         </u>
       </div>
     ) : (
-      <Link to="/join">Join</Link>
+      <h3>
+        <Link to="/join">Join</Link>
+      </h3>
     )}
   </div>
 );

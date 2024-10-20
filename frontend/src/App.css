@@ -9,7 +9,7 @@ body {
   place-items: center;
   min-width: 100vw;
   min-height: 100vh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #root {
@@ -32,12 +32,17 @@ body {
 }
 
 #header {
-  gap: 15px;
+  gap: 30px;
 }
 
 #header-action-button {
   background-color: #313131;
-  padding: 8px 25px;
+  padding: 10px 10px 10px 60px;
+  cursor: pointer;
+}
+
+#header-action-button a{
+  color: white;
 }
 
 .post-item-downvote > img {
@@ -196,4 +201,7 @@ h3 {
   transition: all 0.2s;
   font-size: 1rem;
   box-sizing: border-box;
+}
+.btn--primary{
+  color: white;
 }
