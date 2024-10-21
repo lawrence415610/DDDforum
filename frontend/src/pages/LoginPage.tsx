@@ -38,7 +38,7 @@ const LoginPage: React.FC = () => {
           Submit
         </button>
         <p>
-          Don't have an account? <Link to="/join">Join here</Link>
+          Don't have an account? <Link to="/registration">Join here</Link>
         </p>
       </form>
     </Layout>

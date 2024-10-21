@@ -19,4 +19,16 @@ type Post = {
   votes: Vote[];
 };
 
-export type { Post, Vote, User, Comment };
+type RegistrationInput = {
+  email: string;
+  userName: string;
+  firstName: string;
+  lastName: string;
+};
+
+type ValidationResult = {
+  success: boolean;
+  errorMessage?: string;
+};
+
+export type { Post, Vote, User, Comment, RegistrationInput, ValidationResult };

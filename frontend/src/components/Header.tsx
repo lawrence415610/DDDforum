@@ -4,7 +4,9 @@ import { User } from "../types";
 
 const Logo = () => (
   <div id="app-logo">
-    <img src={logo}></img>
+    <Link to="/">
+      <img src={logo}></img>
+    </Link>
   </div>
 );
 
@@ -27,14 +29,14 @@ const HeaderActionButton = ({ user }: { user?: User }) => (
       </div>
     ) : (
       <h3>
-        <Link to="/join">Join</Link>
+        <Link to="/registration">Join</Link>
       </h3>
     )}
   </div>
 );
 
 const shouldShowActionButton = (pathName: string) => {
-  return pathName !== "/join";
+  return pathName !== "/registration";
 };
 
 export const Header = () => {

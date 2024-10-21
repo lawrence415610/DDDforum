@@ -1,65 +1,47 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import { Layout } from "../components/Layout";
+import { toast } from "react-toastify";
+import { RegistrationForm } from "../components/RegistrationForm";
+import { api } from "../apis";
+import { RegistrationInput, ValidationResult } from "../types";
+
+function validateForm(input: RegistrationInput): ValidationResult {
+  const { email, firstName, lastName, userName } = input;
+  if (!email || !firstName || !lastName || !userName) {
+    return { success: false, errorMessage: "All fields are necessary." };
+  }
+  if (email.indexOf("@") === -1)
+    return { success: false, errorMessage: "Email invalid." };
+  if (userName.length < 2) {
+    return { success: false, errorMessage: "Username invalid." };
+  }
+  return { success: true };
+}
 
 const SigninPage: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission logic here
-    console.log({ email, userName, firstName, lastName });
+  const handleSubmitRegistrationForm = async (input: RegistrationInput) => {
+    const validateResult = validateForm(input);
+    if (!validateResult.success) {
+      toast.error(validateResult.errorMessage);
+      return;
+    } else {
+      try {
+        const result = await api.register(input);
+        if (result.data.success) {
+          toast.success(`User ${result.data.data.userName} has been created!`);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Error happened during sending request to server.");
+      }
+    }
   };
-
   return (
     <Layout>
-      <form className="registration-form" onSubmit={handleSubmit}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>User Name:</label>
-          <input
-            type="text"
-            value={userName}
-            onChange={(e) => setUserName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>First Name:</label>
-          <input
-            type="text"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Last Name:</label>
-          <input
-            type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
-          />
-        </div>
-        <button className="btn--primary" type="submit">
-          Submit
-        </button>
-        <p>
-          Already have an account? <Link to="/login">Login here</Link>
-        </p>
-      </form>
+      <RegistrationForm
+        onSubmit={(input: RegistrationInput) =>
+          handleSubmitRegistrationForm(input)
+        }
+      />
     </Layout>
   );
 };
