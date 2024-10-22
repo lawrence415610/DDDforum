@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import logo from "/assets/dddforumlogo.png";
 import { Link } from "react-router-dom";
 import { User } from "../types";
+import { UserContext } from "../contexts/userContext";
 
 const Logo = () => (
   <div id="app-logo">
@@ -19,7 +21,7 @@ const TitleAndSubmission = () => (
 );
 
 const HeaderActionButton = ({ user }: { user?: User }) => (
-  <div id="header-action-button">
+  <div className="header-action">
     {user ? (
       <div>
         <div>{user.userName}</div>
@@ -29,7 +31,7 @@ const HeaderActionButton = ({ user }: { user?: User }) => (
       </div>
     ) : (
       <h3>
-        <Link to="/registration">Join</Link>
+        <Link className="header-action__join" to="/registration">Join</Link>
       </h3>
     )}
   </div>
@@ -40,11 +42,16 @@ const shouldShowActionButton = (pathName: string) => {
 };
 
 export const Header = () => {
+  const { user } = useContext(UserContext);
   return (
     <header id="header" className="flex align-center">
       <Logo />
       <TitleAndSubmission />
-      {shouldShowActionButton(location.pathname) ? <HeaderActionButton /> : ""}
+      {shouldShowActionButton(location.pathname) ? (
+        <HeaderActionButton user={user} />
+      ) : (
+        ""
+      )}
     </header>
   );
 };

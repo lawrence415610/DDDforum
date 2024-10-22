@@ -6,6 +6,7 @@ import { api } from "../apis";
 import { RegistrationInput, ValidationResult } from "../types";
 import { Spinner } from "../components/Spinner";
 import { UserContext } from "../contexts/userContext";
+import { useNavigate } from "react-router-dom";
 
 function validateForm(input: RegistrationInput): ValidationResult {
   const { email, firstName, lastName, userName } = input;
@@ -23,6 +24,7 @@ function validateForm(input: RegistrationInput): ValidationResult {
 const SigninPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
   const handleSubmitRegistrationForm = async (input: RegistrationInput) => {
     const validateResult = validateForm(input);
     if (!validateResult.success) {
@@ -36,6 +38,7 @@ const SigninPage: React.FC = () => {
           setUser(result.data.data);
           setLoading(false);
           toast.success(`User ${result.data.data.userName} has been created!`);
+          navigate("/");
         }
       } catch (error) {
         setLoading(false);

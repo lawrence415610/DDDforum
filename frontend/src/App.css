@@ -35,13 +35,13 @@ body {
   gap: 30px;
 }
 
-#header-action-button {
+.header-action__join {
   background-color: #313131;
   padding: 10px 10px 10px 60px;
   cursor: pointer;
 }
 
-#header-action-button a{
+#header-action-button a {
   color: white;
 }
 
@@ -202,19 +202,19 @@ h3 {
   font-size: 1rem;
   box-sizing: border-box;
 }
-.btn--primary{
+.btn--primary {
   color: white;
 }
 
-.spinner__backdrop{
+.spinner__backdrop {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: .6;
+  opacity: 0.6;
   position: absolute;
-  top:0;
-  left:0;
-  right:0;
+  top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
   z-index: 1000;
   background-color: white;

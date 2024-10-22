@@ -2,17 +2,17 @@ import React, { createContext, ReactNode, useState } from "react";
 import { User } from "../types";
 
 export const UserContext = createContext<{
-  user: User | null;
-  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+  user?: User;
+  setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
 }>({
-  user: null,
-  setUser: () => null,
+  user: undefined,
+  setUser: () => undefined,
 });
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User>();
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}
