@@ -9,6 +9,7 @@ export const MainPage = () => {
       dateCreated: "2024/10/01",
       memberPostedBy: {
         user: {
+          id: "1",
           firstName: "lawrence",
           lastName: "liu",
           email: "lawrence.liu@yelinliu.com",

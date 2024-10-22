@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Layout } from "../components/Layout";
 import { toast } from "react-toastify";
 import { RegistrationForm } from "../components/RegistrationForm";
 import { api } from "../apis";
 import { RegistrationInput, ValidationResult } from "../types";
 import { Spinner } from "../components/Spinner";
+import { UserContext } from "../contexts/userContext";
 
 function validateForm(input: RegistrationInput): ValidationResult {
   const { email, firstName, lastName, userName } = input;
@@ -21,7 +22,7 @@ function validateForm(input: RegistrationInput): ValidationResult {
 
 const SigninPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
-
+  const { setUser } = useContext(UserContext);
   const handleSubmitRegistrationForm = async (input: RegistrationInput) => {
     const validateResult = validateForm(input);
     if (!validateResult.success) {
@@ -32,6 +33,7 @@ const SigninPage: React.FC = () => {
         setLoading(true);
         const result = await api.register(input);
         if (result.data.success) {
+          setUser(result.data.data);
           setLoading(false);
           toast.success(`User ${result.data.data.userName} has been created!`);
         }

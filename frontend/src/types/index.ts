@@ -1,5 +1,6 @@
 type Vote = { id: number; postId: number; voteType: "Upvote" | "Downvote" };
 type User = {
+  id: string;
   userName: string;
   firstName: string;
   lastName: string;
