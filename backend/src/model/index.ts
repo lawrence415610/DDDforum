@@ -4,4 +4,4 @@ const prisma = new PrismaClient();
 
 const User = prisma.user;
 
-export { User };
+export { prisma, User };
