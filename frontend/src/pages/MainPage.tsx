@@ -1,40 +1,36 @@
+import { useEffect, useState } from "react";
 import { Layout } from "../components/Layout";
 import { PostsViewSwitcher } from "../components/PostViewSwitcher";
 import { PostsList } from "../components/PostList";
-import { Post } from "../types";
+import { api } from "../apis";
+import { Spinner } from "../components/Spinner";
 export const MainPage = () => {
-  const posts: Post[] = [
-    {
-      title: "The first Post",
-      dateCreated: "2024/10/01",
-      memberPostedBy: {
-        user: {
-          id: "1",
-          firstName: "lawrence",
-          lastName: "liu",
-          email: "lawrence.liu@yelinliu.com",
-          userName: "lawrence",
-        },
-      },
-      comments: [
-        {
-          content: "this is the new post",
-        },
-      ],
-      votes: [
-        {
-          id: 1,
-          postId: 1,
-          voteType: "Upvote",
-        },
-      ],
-    },
-  ];
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  async function getPosts() {
+    setLoading(true);
+    try {
+      const result = await api.getPopularPosts();
+      const resultData = result.data;
+      if (resultData.success) {
+        setPosts(resultData.data.posts);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   return (
     <Layout>
       <PostsViewSwitcher />
-      <PostsList posts={posts} />
+      {loading ? <Spinner /> : <PostsList posts={posts} />}
     </Layout>
   );
 };

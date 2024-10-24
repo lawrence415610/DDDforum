@@ -8,4 +8,7 @@ export const api = {
   register: (input: RegistrationInput) => {
     return axios.post("/users/new", input);
   },
+  getPopularPosts: () => {
+    return axios.get("/posts?sort=recent");
+  },
 };
