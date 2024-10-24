@@ -1,14 +1,6 @@
 import { Request, Response } from "express";
-import { User } from "../model/user";
-
-enum Error {
-  UsernameAlreadyTaken = "UsernameAlreadyTaken",
-  EmailAlreadyInUse = "EmailAlreadyInUse",
-  ValidationError = "ValidationError",
-  ServerError = "ServerError",
-  ClientError = "ClientError",
-  UserNotFound = "UserNotFound",
-}
+import { User } from "../model";
+import { Error } from "../enums";
 
 function generateSimplePassword(length: number = 8): string {
   const characters =

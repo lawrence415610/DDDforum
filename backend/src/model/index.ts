@@ -3,5 +3,6 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 const User = prisma.user;
+const Post = prisma.post;
 
-export { User };
+export { prisma, User, Post };
