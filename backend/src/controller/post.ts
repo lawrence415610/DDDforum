@@ -27,7 +27,6 @@ const getPopularPosts = async (req: Request, res: Response): Promise<any> => {
       success: true,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       error: Error.ServerError,
       success: false,
